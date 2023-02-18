@@ -15,15 +15,15 @@ const getNotes = asyncHandler(async (req, res) => {
     req.status(401);
     throw new Error("User not found");
   }
-
-  const ticket = await Ticket.findById(req.params.ticketId);
+  
+  const ticket = await Ticket.findById(req.params['ticketId']);
 
   if (ticket.user.toString() !== req.user.id) {
     req.status(401);
     throw new Error("User not authorized");
   }
 
-  const notes = await Note.find({ ticket: req.params.tickedId });
+  const notes = await Note.find({ ticket: req.params['ticketId'] });
 
   res.status(200).json(notes);
 });

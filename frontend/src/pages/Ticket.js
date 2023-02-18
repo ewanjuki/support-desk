@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { getTicket, reset, closeTicket } from "../features/tickets/ticketSlice";
+import { getNotes } from "../features/notes/noteSlice";
 import Spinner from "../components/Spinner";
 import BackButton from "../components/BackButton";
 
@@ -33,6 +34,7 @@ function Ticket() {
       toast.error(message);
     }
     dispatch(getTicket(ticketId));
+    dispatch(getNotes(ticketId));
   }, [dispatch, ticketId, isError, message]);
 
   const ticketCloseHandler = () => {
