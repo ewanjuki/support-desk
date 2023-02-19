@@ -40,7 +40,7 @@ const addNote = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const ticket = await Ticket.findById(req.params.ticketId);
+  const ticket = await Ticket.findById(req.params['ticketId']);
 
   if (ticket.user.toString() !== req.user.id) {
     req.status(401);
@@ -50,7 +50,7 @@ const addNote = asyncHandler(async (req, res) => {
   const note = await Note.create({
     text: req.body.text,
     isStaff: false,
-    ticket: req.params.ticketId,
+    ticket: req.params['ticketId'],
     user: req.user.id,
   });
 
